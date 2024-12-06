@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="col-sm-4 col-md-4 col-lg-4 mb-4">
+    <app-update-types
+      [bookType]="updateType"
+      [ajout]="ajout"
+      (typeUpdated)="typeUpdated($event)"
+    ></app-update-types>
+  </div>
+
+  <div class="card shadow mb-4">
+    <div class="card-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Actions</th> <!-- Added Actions header -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let type of bookTypes">
+            <td>{{ type.id }}</td>
+            <td>{{ type.name }}</td>
+            <td>{{ type.description }}</td>
+            <td><a class="btn btn-success" (click)="updateTyp(type)">Edit</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

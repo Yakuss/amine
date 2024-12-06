@@ -1,0 +1,149 @@
+<!-- Navigation Bar -->
+<nav  class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold" href="#">Private Library</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul *ngIf="authservice.isloggedIn" class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/books">Home</a>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBooks" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Books
+          </a>
+          <ul class="dropdown-menu shadow-sm" aria-labelledby="navbarDropdownBooks">
+            <li><a class="dropdown-item" *ngIf="authservice.isAdmin()" routerLink="add-book">Add books</a></li>
+            <li><a class="dropdown-item" routerLink="books">List books</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" routerLink="rechercheParBookType">Search by type</a></li>
+            <li><a class="dropdown-item" routerLink="rechercheParTitle">Search by title</a></li>
+            <li><a class="dropdown-item" routerLink="listTypes">Manage Types</a></li>
+          </ul>
+        </li>
+      </ul>
+
+
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUser" role="button" data-bs-toggle="dropdown" aria-expanded="true">
+            {{authservice.loggedUser}}
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="navbarDropdownUser">
+            <li><a *ngIf="!authservice.isloggedIn" class="dropdown-item" routerLink="login">Login</a></li>
+            <li><a *ngIf="authservice.isloggedIn" class="dropdown-item" (click)="onLogout()">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Main Content Area -->
+<div class="container-fluid min-vh-100">
+  <router-outlet></router-outlet>
+</div>
+
+<!-- Footer -->
+<footer class="bg-light mt-auto py-4 border-top">
+  <div class="container">
+    <div class="row gy-4">
+      <div class="col-lg-4">
+        <h5 class="mb-3">About Our Library</h5>
+        <p class="text-muted">
+          Welcome to our private library system. Discover and manage your reading experience with our comprehensive collection.
+        </p>
+      </div>
+
+      <div class="col-lg-4">
+        <h5 class="mb-3">Quick Links</h5>
+        <ul class="list-unstyled">
+          <li class="mb-2"><a href="#" class="text-decoration-none text-muted">About Us</a></li>
+          <li class="mb-2"><a href="#" class="text-decoration-none text-muted">Privacy Policy</a></li>
+          <li class="mb-2"><a href="#" class="text-decoration-none text-muted">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-4">
+        <h5 class="mb-3">Contact Info</h5>
+        <ul class="list-unstyled">
+          <li class="mb-2 text-muted">123 Library Street</li>
+          <li class="mb-2 text-muted">City, Country</li>
+          <li class="mb-2 text-muted">Phone: +216 58 910 215</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-12">
+        <hr>
+        <p class="text-center text-muted mb-0">
+          © 2024 Private Library. All rights reserved.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- CSS Styles -->
+<style>
+/* Navbar enhancements */
+.navbar {
+  border-bottom: 1px solid rgba(0,0,0,.1);
+}
+
+.navbar-brand {
+  font-size: 1.4rem;
+}
+
+.nav-link {
+  position: relative;
+  padding: 0.5rem 1rem;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--bs-primary);
+  transition: width 0.3s ease-in-out;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.dropdown-menu {
+  border: none;
+}
+
+.dropdown-item:hover {
+  background-color: rgba(var(--bs-primary-rgb), 0.1);
+}
+
+/* Footer enhancements */
+footer {
+  background-color: var(--bs-light);
+}
+
+footer a:hover {
+  color: var(--bs-primary) !important;
+}
+
+/* General layout */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.min-vh-100 {
+  flex: 1;
+}
+</style>

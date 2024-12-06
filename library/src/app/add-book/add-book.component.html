@@ -1,0 +1,55 @@
+<div class="container mt-5">
+  <h2>Add New Book</h2>
+  <form (ngSubmit)="addBook()" #bookForm="ngForm">
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input type="text" id="title" class="form-control" [(ngModel)]="newBook.title" name="title" required />
+    </div>
+
+    <div class="mb-3">
+      <label for="author" class="form-label">Author</label>
+      <input type="text" id="author" class="form-control" [(ngModel)]="newBook.author" name="author" required />
+    </div>
+
+    <div class="mb-3">
+      <label for="publicationDate" class="form-label">Publication Date</label>
+      <input type="date" id="publicationDate" class="form-control" [(ngModel)]="newBook.publicationDate"
+        name="publicationDate" required />
+    </div>
+
+    <div class="mb-3">
+      <label for="pdfUrl" class="form-label">PDF URL</label>
+      <input type="url" id="pdfUrl" class="form-control" [(ngModel)]="newBook.pdfUrl" name="pdfUrl" required />
+    </div>
+
+    <div class="mb-3">
+      <label for="imageUrl" class="form-label">Image URL</label>
+      <input type="url" id="imageUrl" class="form-control" [(ngModel)]="newBook.imageUrl" name="imageUrl" required />
+    </div>
+
+    <div class="mb-3 form-check">
+      <input type="checkbox" id="favorite" class="form-check-input" [(ngModel)]="newBook.favorite" name="favorite" />
+      <label for="favorite" class="form-check-label">Mark as Favorite</label>
+    </div>
+
+    <!-- Dropdown for selecting BookType -->
+    <div class="mb-3">
+      <label for="bookType" class="form-label">Select Book Type</label>
+      <select id="bookType" class="form-control" [(ngModel)]="selectedBookTypeId" name="bookType" required>
+        <option value="" disabled>Select a book type</option>
+        <option *ngFor="let type of booktypes" [value]="type.id">{{ type.name }}</option>
+      </select>
+    </div>
+
+    <div class="col-sm-16 col-md-16 col-lg-16">
+      <label class="mb-2">Image :</label>
+      <input type="file" (change)="onImageUpload($event)" name="logo" class="form-control">
+    </div>
+
+    <div class="col-sm-16 col-md-16 col-lg-16">
+      <img [src]="imagePath" class="card-img-top img-fluid rounded-start" style="width: 500px; height: 300px" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add Book</button>
+  </form>
+</div>

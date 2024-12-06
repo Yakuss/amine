@@ -1,0 +1,45 @@
+<div class="container mt-5">
+  <!-- Input Field and Button for Searching by Book Title -->
+
+  <form class="form-inline">
+    <div class="form-group mx-sm-3 mb-2 mt-2 ">
+      <label>Nom Produit en tapant</label>
+      <input #nom [(ngModel)]="searchTerm" name="searchTerm" class="form-control">
+    </div>
+  </form>
+
+
+<!--   <form class="form-inline"> version 2
+    <div class="form-group mx-sm-3 mb-2 mt-2 ">
+      <label>Nom Produit en tapant</label>
+      <input class="form-control" #searchTerm (keyup)="onKeyUp(searchTerm.value)">
+    </div>
+  </form> -->
+
+
+ <!--  <div class="row mb-4"> version 1
+    <div class="col-md-8 d-flex">
+      <input type="text" class="form-control" placeholder="Search by title..." [(ngModel)]="bookTitle" (input)="rechercheBooks()" />
+      <button class="btn btn-primary ms-2" (click)="rechercheBooks()">Search</button>
+    </div>
+  </div> -->
+
+  <!-- Books Cards Display -->
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col" *ngFor="let book of books | searchFilter: searchTerm ">
+      <div class="card h-100 shadow-sm" style="border-radius: 10px;">
+        <img [src]="book.imageUrl || 'https://via.placeholder.com/150'" class="card-img-top" alt="{{ book.title }}" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+        <div class="card-body">
+          <h5 class="card-title">{{ book.title }}</h5>
+          <p class="card-text">Author: {{ book.author }}</p>
+          <p class="card-text">Published on: {{ book.publicationDate | date }}</p>
+          <p class="card-text" *ngIf="book.favorite">⭐ Favorite</p>
+          <p class="card-text" *ngIf="book.bookType">{{ book.bookType.name }}</p>
+        </div>
+        <div class="card-footer text-center">
+          <a [href]="book.pdfUrl" class="btn btn-primary" target="_blank">View Details</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
